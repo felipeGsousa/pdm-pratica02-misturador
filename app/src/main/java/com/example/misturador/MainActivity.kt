@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var primeiraCor: PrimeiraCor
     private lateinit var valoresRgb: ArrayList<Int>
     private lateinit var tela: View
+    private lateinit var manipulaTela: ManipulaTela
+    private lateinit var seekBarListener: SeekBarListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,38 +36,15 @@ class MainActivity : AppCompatActivity() {
         this.seekbarGreen = findViewById(R.id.seekbarGreen)
         this.seekbarBlue = findViewById(R.id.seekbarBlue)
 
+        this.manipulaTela = ManipulaTela(seekbarRed, seekbarGreen, seekbarBlue,tela ,textViewMensagem)
+
+        this.seekBarListener = SeekBarListener(manipulaTela)
+
         definePrimeiraCor()
 
-        this.seekbarRed.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                atualizaTela()
-                atualizaTextView()
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar) {}
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {}
-        })
-        this.seekbarGreen.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                atualizaTela()
-                atualizaTextView()
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar) {}
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {}
-        })
-        this.seekbarBlue.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                atualizaTela()
-                atualizaTextView()
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar) {}
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {}
-        })
+        this.seekbarRed.setOnSeekBarChangeListener(seekBarListener)
+        this.seekbarGreen.setOnSeekBarChangeListener(seekBarListener)
+        this.seekbarBlue.setOnSeekBarChangeListener(seekBarListener)
     }
 
     private fun definePrimeiraCor(){
@@ -83,7 +62,5 @@ class MainActivity : AppCompatActivity() {
         this.textViewMensagem.text = "%x".format(seekbarRed.progress).toUpperCase() + "%x".format(seekbarGreen.progress).toUpperCase() + "%x".format(seekbarBlue.progress).toUpperCase()
     }
 
-    private fun atualizaTela(){
-        this.tela.setBackgroundColor(Color.rgb(seekbarRed.progress, seekbarGreen.progress, seekbarBlue.progress))
-    }
+
 }
