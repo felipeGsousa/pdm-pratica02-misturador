@@ -55,12 +55,6 @@ class MainActivity : AppCompatActivity() {
         seekbarGreen.progress = valoresRgb[1]
         seekbarBlue.progress = valoresRgb[2]
 
-        atualizaTextView()
+        manipulaTela.atualizaTextView()
     }
-
-    private fun atualizaTextView(){
-        this.textViewMensagem.text = "%x".format(seekbarRed.progress).toUpperCase() + "%x".format(seekbarGreen.progress).toUpperCase() + "%x".format(seekbarBlue.progress).toUpperCase()
-    }
-
-
 }
