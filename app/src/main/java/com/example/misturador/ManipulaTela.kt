@@ -1,6 +1,7 @@
 package com.example.misturador
 
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.widget.SeekBar
 import android.widget.TextView
@@ -28,7 +29,11 @@ class ManipulaTela {
     }
 
     fun atualizaTextView(){
-        this.textViewMensagem.text = "%x".format(seekbarRed.progress).toUpperCase() + "%x".format(seekbarGreen.progress).toUpperCase() + "%x".format(seekbarBlue.progress).toUpperCase()
+        this.textViewMensagem.text = "#" + "%x".format((this.tela.getBackground() as ColorDrawable).color).toUpperCase().subSequence(2,8)
+
+        /*"%x".format(seekbarRed.progress).toUpperCase() +
+                "%x".format(seekbarGreen.progress).toUpperCase() +
+                "%x".format(seekbarBlue.progress).toUpperCase()*/
     }
 
     fun atualizaTela(){
